@@ -22,11 +22,9 @@ namespace proxy.Controllers {
                 switch (data.id) {
 
                     case 1:
-                        //return Redirect(url1);
                         return ApiCall.PostApi(urls[0],data);
 
                     case 2:
-                        //return Redirect(url2);
                         return ApiCall.PostApi(urls[1], data);
 
                     case 3:
