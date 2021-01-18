@@ -12,31 +12,19 @@ using System.Web;
 namespace proxy.Models {
     public class ApiCall {
 
-        public static string GetApi(string ApiUrl) {
-
-            var responseString = "";
-            var request = (HttpWebRequest)WebRequest.Create(ApiUrl);
-            request.Method = "GET";
-            request.ContentType = "application/json";
-            
-            using (var response1 = request.GetResponse()) {
-                using (var reader = new StreamReader(response1.GetResponseStream())) {
-                    responseString = reader.ReadToEnd();
-                }
-            }
-            return responseString;
-
-        }
-
         public static string PostApi(string ApiUrl, request postData) {
            
-
+            
             var client = new HttpClient();
-            string endpoint = ApiUrl;
-            var response = " && "+client.PostAsJsonAsync(endpoint, postData).GetAwaiter()
-                .GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult() + "(" + postData.id + ")";
+            
+            string endpoint = ApiUrl,result="";
+            //var response = " && "+client.PostAsJsonAsync(endpoint, postData).GetAwaiter()
+            //    .GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult() + "(" + postData.id + ")";
+            var response =client.PostAsJsonAsync(endpoint, postData);
+                 result=  " && " +  response.Result.Content.ReadAsStringAsync().Result + "(" + postData.id + ")";
 
-            return response;
+
+            return result;
         }
 
     }

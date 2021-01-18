@@ -33,8 +33,10 @@ namespace proxy.Controllers {
                         
                             Parallel.ForEach(urls, url => {
                                 count++;
-                                result += ApiCall.PostApi(url, data);
-                                result += "count is : "+count;
+                                lock (result) { 
+                                    result += ApiCall.PostApi(url, data);
+                                }
+                                
                             });
 
                         return result;
